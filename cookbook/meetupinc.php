@@ -17,7 +17,7 @@
 +----------------------------------------------------------------------+
 */
 
-$RecipeInfo['MeetupAPIEventList']['Version'] = '2013-06-28';
+$RecipeInfo['MeetupAPIEventList']['Version'] = '2013-12-11';
 
 include_once ("cookbook/meetupinc/meetuplib.php");
 
