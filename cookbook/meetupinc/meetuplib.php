@@ -44,7 +44,12 @@ function meetup_output($param,$meetupmin = 0,$meetupmax = 0)
                         if ($GLOBALS['MeetupCount'] >= $meetupmin) $meetup_announce = $meetup_announce.$Meetup_String;
                         }
                 }
-                return $meetup_announce;
+        if ($meetup_announce =="")
+                {
+                $meetup_announce = $GLOBALS['MeetupAlt'];
+                }
+
+        return $meetup_announce;
         }
 
 
