@@ -46,6 +46,7 @@ function get_meetup_params ($param)
                 elseif ($param_args['groupid'] == -1) $GLOBALS ['MeetupGroupID'] = 0;
 	if ($param_args['groupflag'] == "false") $GLOBALS ['MeetupGroupFlag'] = false;
 	if ($param_args['groupflag'] == "true") $GLOBALS ['MeetupGroupFlag'] = true;
+	$GLOBALS ['MeetupAlt'] = $param_args['alt'];
 	return "";
 	}
 
