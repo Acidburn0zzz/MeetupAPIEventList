@@ -17,12 +17,20 @@
 +----------------------------------------------------------------------+
 */
 
-$RecipeInfo['MeetupAPIEventList']['Version'] = '2013-12-11';
+$RecipeInfo['MeetupAPIEventList']['Version'] = '2014-02-21';
 
 include_once ("cookbook/meetupinc/meetuplib.php");
 
-Markup('meetupinc', 'inline', "/\\(:meetupinc (.*?):\\)/e","meetup_pmwiki_output('$1')");
-Markup('meetupparams', 'inline', "/\\(:meetupparams (.*?):\\)/e","get_meetup_params('$1')");
+if(function_exists('Markup_e'))
+        {
+        Markup_e('meetupinc', 'inline', "/\\(:meetupinc (.*?):\\)/","meetup_pmwiki_output(\$m[1])");
+        Markup_e('meetupparams', 'inline', "/\\(:meetupparams (.*?):\\)/","get_meetup_params(\$m[1])");
+        }
+else
+        {
+        Markup('meetupinc', 'inline', "/\\(:meetupinc (.*?):\\)/e","meetup_pmwiki_output('$1')");
+        Markup('meetupparams', 'inline', "/\\(:meetupparams (.*?):\\)/e","get_meetup_params('$1')");
+        }
 
 function meetup_pmwiki_output($param)
 	{
@@ -40,6 +48,8 @@ function get_meetup_params ($param)
 		else $GLOBALS ['MeetupMax'] = 0;
 	if ($param_args['venueid'] > 0) $GLOBALS ['MeetupVenueID'] = $param_args['venueid'];
                 elseif ($param_args['venueid'] == -1) $GLOBALS ['MeetupVenueID'] = 0;
+	if ($param_args['date'] > 0) $GLOBALS ['MeetupDate'] = $param_args['date'];
+                else $GLOBALS ['MeetupDate'] = 0;
 	if ($param_args['venueflag'] == "false") $GLOBALS ['MeetupVenueFlag'] = false;
 	if ($param_args['venueflag'] == "true") $GLOBALS ['MeetupVenueFlag'] = true;
 	if ($param_args['groupid'] > 0) $GLOBALS ['MeetupGroupID'] = $param_args['groupid'];
