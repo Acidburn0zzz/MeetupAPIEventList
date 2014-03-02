@@ -41,12 +41,8 @@ function meetup_output($param,$meetupmin = 0,$meetupmax = 0)
                         {
                         $event_v_id = $json_event['venue']['id'];
                         if ($GLOBALS['MeetupCount'] + 1 > $meetupmax AND $meetupmax >0) break;
-                        if ($GLOBALS['MeetupDate'] ==0 OR date("Ymd",$json_event['time']/1000)==$GLOBALS['MeetupDate'])
-                                { 
-                                $Meetup_String = create_meetup_string ($json_event,$param);
-                                if ($GLOBALS['MeetupCount'] >= $meetupmin) $meetup_announce = $meetup_announce.$Meetup_String;
-                                }
-                                
+                        $Meetup_String = create_meetup_string ($json_event,$param);
+                        if ($GLOBALS['MeetupCount'] >= $meetupmin) $meetup_announce = $meetup_announce.$Meetup_String;
                         }
                 }
         if ($GLOBALS['MeetupCount']==0)
@@ -74,6 +70,10 @@ function create_meetup_string ($json_event,$param)
 	$return_string = "";
 	$event_v_id = $json_event['venue']['id'];
         $event_g_id = $json_event['group']['id'];
+        if ($GLOBALS['MeetupDate'] !=0 AND date("Ymd",$json_event['time']/1000)!=$GLOBALS['MeetupDate'])
+                {
+                return "";
+                }
  	if ($GLOBALS['MeetupVenueID'] == $event_v_id AND $GLOBALS['MeetupVenueFlag'] == false) 
                 {
                 return ""; 	        }
